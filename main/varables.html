@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+<div id="test"></div>
+   <script>
+     var students=[
+    { name: 'MANOJ', age: 25, skill: 'Full Stack' },
+    { name: 'Kumar', age: 21, skill: 'Mern Stack' },
+    { name: 'PawanKalyan', age: 40, skill: 'Actor' },
+    { name: 'NTR', age: 39, skill: 'Senior Actor' }
+    ]
+
+    var result=document.getElementById("test")
+    console.log(result)
+    var header=["Name","Age","Skill"]
+    var data=students.map(function(value){
+       return [value.name,value.age,value.skill]
+    })
+
+console.log(data)
+   
+    let finalRes="<table>"
+       finalRes+="<tr>"
+        finalRes+="<th>" + header.join("</th><th>")+"</th>"
+       finalRes+="</tr>"
+    finalRes+=data.map(function(values){
+       let rows='<tr>'
+        rows+="<td>" + values.join("</td><td>")+"</td>"
+        rows+="</tr>"
+       return rows
+
+    }).join("")
+    console.log(finalRes)
+   finalRes+="</table>"
+   result.innerHtml=finalRes
+    console.log(finalRes)
+  
+
+
+
+
+
+
+
+
+
+
+    
+
+    </script>
+
+    </body>
+    </html>
+
+
+
