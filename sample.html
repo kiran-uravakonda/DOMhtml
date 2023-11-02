@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    
+    #button{
+      background-color: #4CAF50;
+      border: 2px solid black;    
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 4px 2px;
+  /* transition-duration: 0.2s; */
+  /* cursor: pointer; */
+    }
+  </style>
+</head>
+
+<body style="text-align: center;">
+  <h1>JavaScript</h1>
+
+  <label for="cars">Choose a country:</label>
+  <select name="cars" id="country">
+  </select> <br> <br>
+  <button id="button">Get Flag</button> <br> <br>
+  <div id="div"></div>  
+
+  <script>
+    var select = document.getElementById("country")
+    var ele = document.getElementById("country");
+    var div = document.getElementById("div");
+    var button = document.getElementById("button");
+    async function value(){
+      var res=await fetch(`https://restcountries.com/v3.1/all`);
+      var finalRes=await res.json()
+      // finalRes.forEach(element => {
+      //   option.innerText= element.name.common
+      //   // console.log(element.name.common)
+      // });
+      // console.log(finalRes)
+      for(var element of finalRes){
+
+        var option=document.createElement('option')
+
+        option.innerText= element.name.common
+        select.append(option)
+        // console.log(option)
+      }
+
+      // console.log(select)
+    }
+    value()
+
+
+    var ajax = new XMLHttpRequest();
+    button.addEventListener('click', () => {
+    
+      var url=`https://restcountries.com/v3.1/name/${ele.value}`
+      ajax.open('GET',url, true)
+      ajax.send()
+
+     
+      ajax.onload = () => {
+      if(ajax.status==200){
+        var res = ajax.responseText;
+        res=JSON.parse(res);
+       let [flag,country]=res;
+       if(country){
+        div.innerHTML=`<img src=${country.flags.png}>`;
+       }
+       else
+       {
+        div.innerHTML=`<img src=${flag.flags.png}>`;
+       }
+      }
+      else
+      div.innerText="File was not found"
+         }
+  
+        
+
+    })
+
+  </script>
+</body>
+
+</html>
